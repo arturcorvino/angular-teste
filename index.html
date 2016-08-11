@@ -27,17 +27,23 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="col-md-5">
-									<div class="form-group">
+									<label class="margin-top-sm text-brand-accent">Tipo</label>
+								</div>
+								<div class="col-md-7">
+									<label class="margin-top-sm text-brand-accent">Valor</label>
+								</div>
+								<div class="col-md-5">
+									<div class="form-group margin-top-no">
 										<select class="form-control" ng-required="true" ng-model="entry.type" ng-options="type.title for type in types | orderBy:'nome'"></select>
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div class="form-group">
+									<div class="form-group margin-top-no">
 										<input ui-money-mask class="form-control" type="text" ng-model="entry.value" name="value" placeholder="" ng-required="true" ng-minlength="1"/>
 									</div>
 								</div>
 								<div class="col-md-3">
-									<div class="form-group">
+									<div class="form-group margin-top-no">
 										<button class="btn btn-brand waves-attach waves-light btn-block" ng-click="addEntry(entry)" ng-disabled="entryForm.$invalid">Adicionar</button>
 									</div>
 								</div>
