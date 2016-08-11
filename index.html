@@ -1,0 +1,109 @@
+<html ng-app="sistemaFinanceiro">
+<head>
+	<meta charset="UTF-8">
+	<title>Sistema Financeiro</title>
+
+	<!-- Components -->
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+
+</head>
+<body ng-controller="sistemaFinanceiroCtrl" class="page-brand">
+
+	<main class="content">
+		<div class="content-header ui-content-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+						<h1 class="content-heading">{{app}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+					<section class="content-inner margin-top-no">
+						<div class="card">
+							<div class="card-main">
+								<div class="col-md-5">
+									<div class="form-group">
+										<select class="form-control" ng-required="true" ng-model="entry.type" ng-options="type.title for type in types | orderBy:'nome'"></select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<input ui-money-mask class="form-control" type="text" ng-model="entry.value" name="value" placeholder="" ng-required="true" ng-minlength="1"/>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<button class="btn btn-brand waves-attach waves-light btn-block" ng-click="addEntry(entry)" ng-disabled="entryForm.$invalid">Adicionar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div ng-show="entryForm.value.$dirty" ng-messages="entryForm.value.$error">
+							<div ng-message="required" class="alert alert-danger">
+								Por favor, preencha o campo valor!
+							</div>
+							<div ng-message="minlength" class="alert alert-danger">
+								O campo valor deve ter no mínimo 1 caracter.
+							</div>
+						</div>
+
+						<div ng-show="entryForm.type.$dirty" ng-messages="entryForm.type.$error">
+							<div ng-message="required" class="alert alert-danger">
+								Por favor, preencha o campo Tipo!
+							</div>
+						</div>
+
+						<h2 class="content-sub-heading">Entrada e saída</h2>
+						<div class="table-responsive">
+							<table class="table" ng-show="entries.length > 0" class="table table-striped">
+								<thead>
+									<tr>
+										<th><a href="javascript:;" ng-click="orderBy('type')">Tipo</a></th>
+										<th><a href="javascript:;" ng-click="orderBy('value')">Valor</a></th>
+										<th width="5%">#</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="entry in entries | filter:termSearch | orderBy:orderCriteria:directionOrder">
+										<td>{{entry.type.title}}</td>
+										<td>$ {{entry.value}}</td>
+										<td><a class="btn btn-flat btn-red waves-attach waves-effect" ng-click="removeEntry(entry)">Remover</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-green">
+									<div class="card-main">
+										<div class="card-inner">
+											<p>Valor Total: {{getTotal()}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Components -->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+	<script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+
+	<!-- Include Apps -->
+	<script src="js/app.js"></script>
+	<script src="js/controllers/sistemaFinanceiroCtrl.js"></script>
+</body>
+</html>
+

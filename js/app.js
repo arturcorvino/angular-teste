@@ -1,0 +1,1 @@
+angular.module("sistemaFinanceiro", ["ngMessages", "ui.utils.masks"]);
